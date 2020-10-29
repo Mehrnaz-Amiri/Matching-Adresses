@@ -1,0 +1,116 @@
+---
+title: "Addresses"
+author: '"Mehrnaz Amiri"'
+date: "6/30/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+streets_names <- read.csv("~/Desktop/streetnames.csv", sep = ",", header = TRUE, stringsAsFactors=FALSE)
+streets_names[285:377, ]
+
+# LOWNEY WAY is not in TIGER data.
+streets_names$x <- gsub("BOARD AL", "BOARD ALY", streets_names$x)
+streets_names$x <- gsub("DEDHAM LINE", "DEDHAM ST", streets_names$x)
+# DEDHAM is not in properties_geo file, in TIGER data there are DEDHAM ST, E DEDHAM ST, W DEDHAM ST, DEDHAM PKWY. On BostonMap there is not DEDHAM LINE.
+streets_names$x <- gsub("WARREN PK", "WARREN PARK", streets_names$x)
+streets_names$x <- gsub("HAYDN ST", "HAYDEN ST", streets_names$x)
+# ST FRANCIS DE SALES CT is not in TIGER data. On BostonMap its location is in "BUNKER HILL ST".
+# MILTON TOWN LINE is not in TIGER data.
+streets_names$x <- gsub("NORTHDALE ST", "NORTHDALE RD", streets_names$x)
+streets_names$x <- gsub("E BROADWAY ST", "E BROADWAY", streets_names$x)
+streets_names$x <- gsub("RAILROAD RD", "RAILROAD ST", streets_names$x)
+# MILTON LINE is not in TIGER data.
+streets_names$x <- gsub("ADAMS", "ADAMS ST", streets_names$x)
+streets_names$x <- gsub("MOTHER JULIA RD", "MOTHER JULIAN RD", streets_names$x)
+streets_names$x <- gsub("CHARLES RIVER DAM", "CHARLES RIVER DAM RD",streets_names$x)
+streets_names$x <- gsub("SNOW", "SNOW ST", streets_names$x)
+streets_names$x <- gsub("CHARLESGATE ST", "CHARLESGATE", streets_names$x)
+streets_names$x <- gsub("BELMONT PL", "BELMONT ST", streets_names$x)
+streets_names$x <- gsub("LOTHROP PL", "LOTHROP ST", streets_names$x)
+streets_names$x <- gsub("LEAMINGTON ST", "LEAMINGTON RD", streets_names$x)
+streets_names$x <- gsub("NEW PICKERTS WHARF", "CENTRAL WHARF", streets_names$x)
+streets_names$x <- gsub("BOWDOIN SQ", "BOWDOIN ST", streets_names$x)
+# THIRTY FOOT is not in TIGER data, and on BostonMap.
+streets_names$x <- gsub("COMMERCIAL WHARF EAST", "COMMERCIAL WHARF", streets_names$x)
+# ST CECELIA ST is not in TIGER data. On BostonMap its location is near to "SCOTIA ST".
+streets_names$x <- gsub("GROVE PL", "GROVE ST", streets_names$x)
+streets_names$x <- gsub("LEVERETT ST", "LEVERETT AVE", streets_names$x)
+# BOSTON UNI BRIDGE ZZ is not in TIGER data. On BostonMap is "Boston University Bridge" near to MOUNTFORT ST.
+streets_names$x <- gsub("HOWE AVE", "HOWE ST", streets_names$x)
+# SHANAHAN PL is not in TIGER data. On BostonMap its location is in "ALBANY ST".
+# SARGENTS WHARF is not in TIGER data.
+# EDGEWORTH PL is not in TIGER data. On BostonMap its location is between "PROSPECT ST" and "TREMONT ST"
+streets_names$x <- gsub("BRADEEN STREET FW", "BRADEEN ST", streets_names$x)
+streets_names$x <- gsub("BAKERS AL", "BAKERS ALY", streets_names$x)
+streets_names$x <- gsub("BATTERY WHARF ST", "BATTERY WHARF", streets_names$x)
+streets_names$x <- gsub("PINEFIELD LN", "PINEFIELD RD", streets_names$x)
+streets_names$x <- gsub("OAKLAND PK", "OAKLAND PL", streets_names$x)
+# BEAL PL is not in TIGER data.
+streets_names$x <- gsub("READVILLE TROTTING PK", "READVILLE ST", streets_names$x)
+streets_names$x <- gsub("1ST ST", "E 1ST ST", streets_names$x)
+# Also, in TIGER data there is "W 1ST ST". But, there are not in properties_geo file.
+streets_names$x <- gsub("HESTIA PK", "HESTIA PARK", streets_names$x)
+streets_names$x <- gsub("PARLEY VALE ST", "PARLEY VALE", streets_names$x)
+streets_names$x <- gsub("CUMMINGS HWY", "CUMMINGS ST", streets_names$x)
+# Also, there are CUMMINGS RD and CUMMINGS AVE in TIGER data, but they are not in properties_geo file.
+# DEER ISLAND is not in TIGER data, on BostonMap there is "DEER ISLAND RD" near it.
+# LONG ISLAND is not in TIGER data, on BostonMap there is "Long Island Rd" near it.
+# SPECTACLE ISLAND is not in TIGER data.
+# THOMPSON ISLAND is not in TIGER data.
+streets_names$x <- gsub("MASSPORT BYPASS RD", "MASSPORT HAUL RD", streets_names$x)
+# LOVELLS ISLAND is not in TIGER data, on BostonMap there is "Lovell Island Rd" near it.
+streets_names$x <- gsub("FID KENNEDY DR", "FID KENNEDY AVE", streets_names$x)
+# GALLUPS ISLAND is not in TIGER data.
+# SEAFOOD WAY is not in TIGER data. 
+# GEORGES ISLAND is not in TIGER data.
+# FORT POINT CHANNEL is not in TIGER data. On BostonMap its location is near to "SUMMER ST".
+streets_names$x <- gsub("DRAPER RD", "DRAPER ST", streets_names$x)
+# RAINSFORD ISLAND is not in TIGER data.
+# FORT STRONG is island and not in TIGER data.
+# DILLINGHAM ST is not in TIGER data.
+streets_names$x <- gsub("GARDEN COURT CT", "GARDEN CT ST", streets_names$x)
+streets_names$x <- gsub("ALPINE PL", "ALPINE ST", streets_names$x)
+# FANEUIL HALL SQ is not in TIGER data. On BostonMap its location is near to "STATE ST" and it includes many streets.
+# ALBERT PL is not in TIGER data. On BostonMap it is in ALVIN AVE.
+streets_names$x <- gsub("HAMILTON TER", "HAMILTON PL", streets_names$x)
+# AU BON PAIN WAY is not in TIGER data.
+streets_names$x <- gsub("NEW DORCHESTER AVE BRIDGE", "DORCHESTER AVE", streets_names$x)
+streets_names$x <- gsub("DEDHAM PARISH RD", "PARISH ST", streets_names$x)
+# LEGENDS WAY is not in TIGER data.
+# HAVERHILL ST is not in TIGER data.
+streets_names$x <- gsub("ELLERY CT", "ELLERY ST", streets_names$x)
+streets_names$x <- gsub("COLUMBUS SQ", "COLUMBUS AVE", streets_names$x)
+streets_names$x <- gsub("PARLEY VALE AVE", "PARLEY VALE", streets_names$x)
+# TOBIN BRIDGE is not in TIGER data. On BostonMap it is near to "CHELSEA ST".
+streets_names$x <- gsub("COLUMBIA CIR", "COLUMBIA RD", streets_names$x)
+streets_names$x <- gsub("7TH ST", "E 7TH ST", streets_names$x)
+# Also there is "W 7TH ST" in TIGER data. In properties_geo file, there is "SEVENTH ST".
+# NEPONSET FIELD LN is not in TIGER data. 
+# COTTING ST is not in TIGER data.
+# LORENE RD is not in TIGER data and BostonMap. But, there is street that is "LORENZO ST".
+# HARBOR SHORE DR is not in TIGER data.
+streets_names$x <- gsub("RUNDEL PK", "RUNDEL PARK", streets_names$x)
+streets_names$x <- gsub("HICKORY AVE", "HICKORY LN", streets_names$x)
+streets_names$x <- gsub("WOODLAND AVE", "WOODLAND RD", streets_names$x)
+streets_names$x <- gsub("NEW NORTHERN AVE", "NORTHERN AVE", streets_names$x)
+streets_names$x <- gsub("HOYT PL", "HOYT ST", streets_names$x)
+# AVERBUCH TER is not in TIGER data.
+streets_names$x <- gsub("DEDHAM BRANCH", "DEDHAM ST", streets_names$x)
+# STREET C is not in TIGER data.
+# CITY HALL SQ is not in TIGER data.
+streets_names$x <- gsub("LAMARTINE CT", "LAMARTINE ST", streets_names$x)
+# MBTA (SW CORRIDOR PROJ) is not in TIGER data. There are some stations in TIGER data as "MBTA GREEN LINE TROLLEY (SUSPENDED)".
+# STADIUM WAY is not in TIGER data. On BostonMap it is near to "WESTERN AVE".
+# JOSEPH AGRI ST is not in TIGER data. On BOstonMap it is near to "MARY BOYLE WAY".
+# BALLIN PL is not in TIGER data and BostonMap. There is a street that is "BALLOU PL".
+# TEARSEN ST is not in TIGER data, properties_geo and on BostonMap
+
+```
+
+```{r}
+streets_names[285:377, ]
+```
+
